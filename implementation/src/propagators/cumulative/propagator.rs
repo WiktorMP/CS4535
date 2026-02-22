@@ -116,7 +116,7 @@ where
             let ub = context.upper_bound(&t.start_time);
             let lb = context.lower_bound(&t.start_time);
 
-            println!("Task {}: start_time_lb {}, start_time_ub {}, duration {}, resource_usage {}", i, lb, ub, t.duration, t.resource_usage);
+            //println!("Task {}: start_time_lb {}, start_time_ub {}, duration {}, resource_usage {}", i, lb, ub, t.duration, t.resource_usage);
             if (ub + t.duration as i32) > max_end_time{
                 max_end_time = ub + t.duration as i32;
             };
@@ -134,12 +134,12 @@ where
             }
         };
 
-        println!("Compulsory map: {:?}", compulsory_map);
+        //println!("Compulsory map: {:?}", compulsory_map);
 
         let mut resource_profile: Vec<i32> = vec![0; (max_end_time+1).try_into().unwrap()];
 
         for (i, t) in self.tasks.iter().enumerate(){
-            println!("Task {}: start_time_lb {:?}, start_time_ub {:?}, duration {}, resource_usage {}", i, context.lower_bound(&t.start_time), context.upper_bound(&t.start_time), t.duration, t.resource_usage);
+            //println!("Task {}: start_time_lb {:?}, start_time_ub {:?}, duration {}, resource_usage {}", i, context.lower_bound(&t.start_time), context.upper_bound(&t.start_time), t.duration, t.resource_usage);
             for v in compulsory_map[&(i as i32)].clone().iter(){
                 
                 let new_resource_usage = resource_profile[*v as usize] + t.resource_usage as i32;
@@ -148,8 +148,8 @@ where
             }
         }
 
-        println!("capacity: {}", self.capacity);
-        println!("Resource profile: {:?}", resource_profile);
+        //println!("capacity: {}", self.capacity);
+        //println!("Resource profile: {:?}", resource_profile);
         
         for (time, usage) in resource_profile.iter().enumerate(){
             // find task at the violating time
@@ -209,7 +209,7 @@ where
                         }
                         explanation.push(predicate!(t.start_time >= s-1));
                         explanation.push(predicate!(t.start_time <= s+1));
-                        println!("Explanation: {:?}", explanation);
+                        //println!("Explanation: {:?}", explanation);
                         context.post(
                             predicate!(t.start_time != s),
                              PropositionalConjunction::from(explanation),
