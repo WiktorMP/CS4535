@@ -43,6 +43,7 @@ async def execute_single_run_inner(
     with stdout_path.open("wb") as stdout:
         with stderr_path.open("wb") as stderr:
             run.command = [part[4*3:] if len(part)>5 else part for part in run.command]
+            run.command = run.command.join(" ")
             experiment.set_run_status(run_key, RunStatus.RUNNING)
             logging.info(f"Starting {run_key}... ({index}/{num_runs})")
             logging.info(f"Command: {run.command}")
