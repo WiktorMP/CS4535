@@ -102,10 +102,10 @@ where
 
         let mut total = 0; 
         let mut explanation = Vec::new();
-        println!("Propagating LinearLessOrEqualPropagator with bound: {}", self.bound);
+        //println!("Propagating LinearLessOrEqualPropagator with bound: {}", self.bound);
         for v in self.x.iter(){
-            println!("Variable: {:?}, lb: {}, ub: {}", v, context.lower_bound(v), context.upper_bound(v));
-            println!("{}",predicate![v >= context.lower_bound(v)]);
+            //println!("Variable: {:?}, lb: {}, ub: {}", v, context.lower_bound(v), context.upper_bound(v));
+            //println!("{}",predicate![v >= context.lower_bound(v)]);
             total += context.lower_bound(v);
             explanation.push(predicate![v >= context.lower_bound(v)]);
         }
@@ -140,10 +140,10 @@ where
             // to not do updates that make no sense
             if max_ub < v_ub{
                 // not to recalculate the explanation allow redundant predicate a_k >= a_k_lb for explanation of a_k <= max_ub
-                println!("Updating upper bound of variable {:?} from {} to {}", v, v_ub, max_ub);
+                //println!("Updating upper bound of variable {:?} from {} to {}", v, v_ub, max_ub);
                 let mut new_explanation = explanation.clone();
                 new_explanation.push(predicate![v >= max_ub]);
-                println!("Explanation for updating: {:?}",  new_explanation);
+                //println!("Explanation for updating: {:?}",  new_explanation);
                 context.post(
                     predicate![v <= max_ub],
                      PropositionalConjunction::from(new_explanation),

@@ -28,7 +28,7 @@ impl<Atomic: AtomicConstraint, Var: CheckerVariable<Atomic>> InferenceChecker<At
         let mut compulsory_map: HashMap<i32, Vec<i32>> = HashMap::new();
         for t in self.tasks.iter() {
             let v = &t.start_time;
-            println!("{:?},{:?}, {:?}", v, v.induced_lower_bound(&state), v.induced_upper_bound(&state));
+            //println!("{:?},{:?}, {:?}", v, v.induced_lower_bound(&state), v.induced_upper_bound(&state));
         }
 
         for (i, t) in self.tasks.iter().enumerate(){
@@ -56,7 +56,7 @@ impl<Atomic: AtomicConstraint, Var: CheckerVariable<Atomic>> InferenceChecker<At
             }
         };
 
-        println!("Compulsory map: {:?}", compulsory_map);
+        //println!("Compulsory map: {:?}", compulsory_map);
 
         let mut resource_profile: Vec<i32> = vec![0; (max_end_time+1).try_into().unwrap()];
 
@@ -70,8 +70,8 @@ impl<Atomic: AtomicConstraint, Var: CheckerVariable<Atomic>> InferenceChecker<At
             }
         }
         
-        println!("capacity: {}", self.capacity);
-        println!("Resource profile: {:?}", resource_profile);
+        //println!("capacity: {}", self.capacity);
+        //println!("Resource profile: {:?}", resource_profile);
         // Check if any time step exceeds capacity
         for (time, usage) in resource_profile.iter().enumerate(){
             if *usage > self.capacity as i32{
